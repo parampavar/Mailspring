@@ -8,14 +8,16 @@ branches:
 
 skip_non_tags: true
 
-image: Visual Studio 2017
+image: Visual Studio 2022
 
 init:
   - ps: $env:commit = $env:appveyor_repo_commit.SubString(0,8)
 
 install:
   - ps: Install-Product node $env:NODE_VERSION
-  - ps: npm config set msvs_version 2017
+  - ps: npm config set msvs_version 2022
+  - ps: node --version
+  - ps: npm --version
 
   # Extract the codesigning certs, encrypted private ssh key
   - ps: |
@@ -69,6 +71,6 @@ environment:
       secure: B2pwd1AlmQHjIpIau1NylfEMkwJJ5u7NhxgZcU8WicwP6+cmePnAacYIwpe1fXEf
 
 cache:
-  - node_modules -> package.json
-  - app\node_modules -> app\package.json
-  - '%USERPROFILE%\.npm'
+  # - node_modules -> package.json
+  # - app\node_modules -> app\package.json
+  # - '%USERPROFILE%\.npm'
